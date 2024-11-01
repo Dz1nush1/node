@@ -31,12 +31,12 @@ router.get("/employers", (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при получении работодателей:" });
+        .json({ error: "Произошла ошибка при получении работника:" });
       return;
     }
     employers.forEach((employer) => {
-      let date = new Date(employer.Дата_Основания);
-      employer.Дата_Основания = date.toISOString().substring(0, 10);
+      let date = new Date(employer.Дата_рождения);
+      employer.Дата_рождения = date.toISOString().substring(0, 10);
     });
     res.json(employers);
   });
@@ -47,12 +47,12 @@ router.get("/employers/:id", (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при получении работодателя:" });
+        .json({ error: "Произошла ошибка при получении работника:" });
       return;
     }
     employer.forEach((employer) => {
-      let date = new Date(employer.Дата_Основания);
-      employer.Дата_Основания = date.toISOString().substring(0, 10);
+      let date = new Date(employer.Дата_рождения);
+      employer.Дата_рождения = date.toISOString().substring(0, 10);
     });
     res.json(employer);
   });
@@ -68,11 +68,11 @@ router.post("/employers", upload.single("photo"), (req, res) => {
     Фамилия: req.body.surname,
     Имя: req.body.name,
     Отчество: req.body.patronymic,
-    Организация: req.body.organization,
-    Дата_Основания: req.body.foundation_date,
-    Вакансия: req.body.vacancy,
-    Телефон: req.body.phone,
-    Email: req.body.email,
+    Контактный_номер: req.body.organization,
+    Стаж: req.body.foundation_date,
+    Эл_почта: req.body.vacancy,
+    Зарплата: req.body.phone,
+    Дата_рождения: req.body.email,
     Фото: req.file.path.replace(/\\/g, "/"),
   };
 
@@ -81,10 +81,10 @@ router.post("/employers", upload.single("photo"), (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при добавлении работодателя:" });
+        .json({ error: "Произошла ошибка при добавлении работника:" });
       return;
     }
-    res.json({ message: "Работодатель успешно добавлен" });
+    res.json({ message: "Работник успешно добавлен" });
   });
 });
 
@@ -94,7 +94,7 @@ router.delete("/employers/:id", (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при получении работодателя:" });
+        .json({ error: "Произошла ошибка при получении работника:" });
       return;
     }
 
@@ -103,10 +103,10 @@ router.delete("/employers/:id", (req, res) => {
         console.error(err);
         res
           .status(500)
-          .json({ error: "Произошла ошибка при удалении работодателя:" });
+          .json({ error: "Произошла ошибка при удалении работника:" });
         return;
       }
-      res.json({ message: "Работодатель успешно удален" });
+      res.json({ message: "Работник успешно удален" });
     });
   });
 });
@@ -116,10 +116,10 @@ router.delete("/delete-all-employers", (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при удалении работодателей:" });
+        .json({ error: "Произошла ошибка при удалении работника:" });
       return;
     }
-    res.json({ message: "Все работодатели успешно удалены" });
+    res.json({ message: "Все работники успешно удалены" });
   });
 });
 
@@ -128,11 +128,11 @@ router.put("/employers/:id", upload.single("photo"), (req, res) => {
     Фамилия: req.body.surname,
     Имя: req.body.name,
     Отчество: req.body.patronymic,
-    Организация: req.body.organization,
-    Дата_Основания: req.body.foundation_date,
-    Вакансия: req.body.vacancy,
-    Телефон: req.body.phone,
-    Email: req.body.email,
+    Контактный_номер: req.body.organization,
+    Стаж: req.body.foundation_date,
+    Эл_почта: req.body.vacancy,
+    Зарплата: req.body.phone,
+    Дата_рождения: req.body.email,
   };
 
   if (req.file) {
@@ -144,10 +144,10 @@ router.put("/employers/:id", upload.single("photo"), (req, res) => {
       console.error(err);
       res
         .status(500)
-        .json({ error: "Произошла ошибка при обновлении работодателя:" });
+        .json({ error: "Произошла ошибка при обновлении работника:" });
       return;
     }
-    res.json({ message: "Работодатель успешно обновлен" });
+    res.json({ message: "Работник успешно обновлен" });
   });
 });
 
